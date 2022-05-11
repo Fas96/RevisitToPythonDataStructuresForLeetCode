@@ -97,38 +97,77 @@ class LinkedList:
         if self.length == 0:
             return None
         """move head to next and set previous head.next(temp) to None"""
-        temp=self.head
-        self.head=self.head.next
-        temp.next=None
-        self.length-=1
+        temp = self.head
+        self.head = self.head.next
+        temp.next = None
+        self.length -= 1
         """set tail to None when all the list is empty"""
-        if self.length==0:
-            self.tail=None
+        if self.length == 0:
+            self.tail = None
         return temp
 
-    def get(self,index):
-        if index<0 or index>=self.length:
+    def get(self, index):
+        if index < 0 or index >= self.length:
             return None
-        if self.length<index:
-            temp=self.head
+        if self.length < index:
+            temp = self.head
             for _ in range(index):
-                temp=temp.next
+                temp = temp.next
             return temp
 
     def set_Value(self, index, value):
-        temp=self.get(index)
+        temp = self.get(index)
         if temp:
-            temp.value=value
+            temp.value = value
             return True
         return False
 
+    def insert_Node(self, index, value):
+        if index == 0:
+            return self.prependItem(value)
+        if index == self.length:
+            return self.append(value)
+        '''The index before the index we wnat to insert'''
+        temp = self.get(index - 1)
+        '''new node'''
+        new_node = Node(value)
+        '''our new node points to the node after temp'''
+        new_node.next = temp.next;
+        '''our temp at index-1 now points to the new node'''
+        temp.next = new_node
+        self.length += 1
+        return True
 
-"""        
-        if self.length == 1:
-            self.head = None
-            self.tail = None
-        else:
-            self.head = self.head.next"""
+    def remove_at_index(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        # temp=self.get(index-1)
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.popItem()
+
+        prev = self.get(index - 1)
+        temp = prev.next
+
+        prev.next = temp.next
+        temp.next = None
+        self.length -= 1
+        return temp
+
+    def reverse(self):
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+        '''before temp after'''
+        before = None
+        after = temp.next
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+
+            before = temp
+            temp = after
 
     def printList(self):
         temp = self.head
