@@ -9,7 +9,7 @@ class ListNode:
 
 
 def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-    def findNode(head, n):
+    def LocateNode(head, n):
         # Take a slow and fast node
         slow = fast = head
 
@@ -26,10 +26,10 @@ def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNod
     someNode.next = head
 
     # find the node in front of the nth node
-    x = findNode(someNode, n + 1)
+    x = LocateNode(someNode, n + 1)
     x.next = x.next.next
 
-    return dummy.next
+    return someNode.next
 
 
 if __name__ == '__main__':
