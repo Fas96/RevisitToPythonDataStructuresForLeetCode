@@ -33,4 +33,5 @@ def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNod
 
 
 if __name__ == '__main__':
-    Solution.removeNthFromEnd([1, 2, 3, 4, 5], 2)
+    
+    removeNthFromEnd([1, 2, 3, 4, 5], 2)
