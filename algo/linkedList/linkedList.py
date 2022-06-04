@@ -60,8 +60,6 @@ class LinkedList:
         return True
 
     def popItem(self):
-        temp = self.head
-        prev = self.head
         if self.length == 0:
             return None
         temp = self.head
@@ -127,7 +125,7 @@ class LinkedList:
             return self.prependItem(value)
         if index == self.length:
             return self.append(value)
-        '''The index before the index we wnat to insert'''
+        '''The index before the index we want to insert'''
         temp = self.get(index - 1)
         '''new node'''
         new_node = Node(value)
@@ -137,6 +135,21 @@ class LinkedList:
         temp.next = new_node
         self.length += 1
         return True
+
+    def reverseLinkedList(self):
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+
+        before = None
+        after = temp.next
+
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+
+            before = temp
+            temp = after
 
     def remove_at_index(self, index):
         if index < 0 or index >= self.length:
@@ -155,36 +168,51 @@ class LinkedList:
         self.length -= 1
         return temp
 
-    def reverse(self):
-        temp = self.head
-        self.head = self.tail
-        self.tail = temp
-        '''before temp after'''
-        before = None
-        after = temp.next
-        for _ in range(self.length):
-            after = temp.next
-            temp.next = before
-
-            before = temp
-            temp = after
+    # def reverse(self):
+    #     temp = self.head
+    #     self.head = self.tail
+    #     self.tail = temp
+    #     '''before temp after'''
+    #     before = None
+    #     after = temp.next
+    #     for _ in range(self.length):
+    #         after = temp.next
+    #         temp.next = before
+    #
+    #         before = temp
+    #         temp = after
 
     def printList(self):
         temp = self.head
         while temp is not None:
-            print(temp.value)
+            print(temp.value, end='  ')
             temp = temp.next
 
 
 if __name__ == '__main__':
-    userDataList = LinkedList(3)
+    userDataList = LinkedList(1)
+    userDataList.append(2)
+    userDataList.append(3)
+    userDataList.append(4)
+    userDataList.append(5)
+    userDataList.append(6)
+    userDataList.append(7)
+    userDataList.append(8)
+    userDataList.append(9)
+    userDataList.append(10)
+    userDataList.append(11)
     userDataList.append(12)
-    userDataList.append(22)
+    userDataList.append(13)
+    userDataList.append(14)
+    userDataList.append(15)
     # userDataList.popItem()
     userDataList.printList()
     # userDataList.popItem()
     # userDataList.printList()
     # print(userDataList.popItem())
     # userDataList.printList()
+
+    print("\n==========")
     # print(userDataList.popItem())
-    # userDataList.printList()
+    userDataList.reverseLinkedList()
+    userDataList.printList()
