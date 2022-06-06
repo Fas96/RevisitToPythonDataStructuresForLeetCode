@@ -13,9 +13,18 @@ class HashTable:
 
         if self.data_map[index] is not None:
             for i in range(len(self.data_map[index])):
-                if self.data_map[index][i][0]==key:
+                if self.data_map[index][i][0] == key:
                     return self.data_map[index]
         return None
+
+    def HT_keys(self):
+        keys = []
+
+        for i in range(len(self.data_map)):
+            if self.data_map[i] is not None:
+                for ls in self.data_map[i]:
+                    keys.append(ls[0])
+        return keys
 
     def set_item(self, key, value):
         index = self.__hash(key)
@@ -34,7 +43,10 @@ if __name__ == '__main__':
     hashtable.set_item("fas", 23)
     hashtable.set_item("fs", 32)
     hashtable.set_item("s", 32)
+    hashtable.set_item("Bhim", 32)
     hashtable.set_item("fs", 3333)
     hashtable.print_table()
     print("==========")
     print(hashtable.get_item("s"))
+    print("=======")
+    print(hashtable.HT_keys())
