@@ -8,7 +8,6 @@ class CompareList:
                 return True
         return False
 
-
 # Find common items in O(n)
 if __name__ == '__main__':
     sln = CompareList()
