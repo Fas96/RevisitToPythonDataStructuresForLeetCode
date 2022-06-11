@@ -58,12 +58,77 @@ class CusBST:
                     return True
                 temp = temp.right
 
+    def dfs_post_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+            results.append(current_node.value)
+
+        traverse(self.root)
+
+        return results
+
+    def dfs_in_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            results.append(current_node.value)
+            if current_node.right is not None:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+
+    def dfs_pre_order(self):
+        results = []
+
+        def traverse(current_node):
+            results.append(current_node.value)
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+
+    def bfs(self):
+        current_node = self.root
+        queue = []
+        results = []
+        queue.append(current_node)
+
+        while len(queue) > 0:
+            current_node = queue.pop(0)
+            results.append(current_node.value)
+            if current_node.left is not None:
+                queue.append(current_node.left)
+            if current_node.right is not None:
+                queue.append(current_node.right)
+        return results
+
 
 if __name__ == '__main__':
     cusBST = CusBST()
-    cusBST.insertNode(3)
-    cusBST.insertNode(1)
-    cusBST.insertNode(-1)
-    cusBST.insertNode(4)
-    cusBST.insertNode(0)
+    cusBST.insertNode(47)
+    cusBST.insertNode(21)
+    cusBST.insertNode(76)
+    cusBST.insertNode(18)
+    cusBST.insertNode(27)
+    cusBST.insertNode(52)
+    cusBST.insertNode(82)
     print(cusBST.minimumValueBST(cusBST.root).value)
+    print("=====")
+    print(cusBST.bfs())
+    print("DFS dfs_pre_order")
+    print(cusBST.dfs_pre_order())
+    print("dfs_post_order")
+    print(cusBST.dfs_post_order())
+    print("in order traversal")
+    print(cusBST.dfs_in_order())
