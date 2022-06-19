@@ -85,6 +85,19 @@ class CusBST:
         traverse(self.root)
         return results
 
+    def height(self,root):
+
+        # Check if the binary tree is empty
+        if root is None:
+            # If TRUE return 0
+            return 0
+            # Recursively call height of each node
+        leftAns = self.height(root.left)
+        rightAns = self.height(root.right)
+
+        # Return max(leftHeight, rightHeight) at each iteration
+        return max(leftAns, rightAns) + 1
+
     def dfs_pre_order(self):
         results = []
 
